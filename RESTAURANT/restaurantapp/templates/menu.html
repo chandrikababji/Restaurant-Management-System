@@ -1,254 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KS Kitchen - Restaurant Management</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KS Kitchen - Restaurant Management</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        header {
-            background-color: #e74c3c;
-            color: white;
-            padding: 20px;
-            position: relative;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f6fa;
+      color: #2c3e50;
+      margin: 0;
+      padding: 0;
+    }
 
-        header h1 {
-            margin: 0;
-        }
+    header {
+      background-color: #d63031;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
 
-        /* Overlay */
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: 1px;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    #name-input {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 15px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
 
-        h1, h2 {
-            text-align: center;
-        }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eaeaea;
-        }
+    h2 {
+      text-align: center;
+      color: #d63031;
+    }
 
-        .menu-item span {
-            flex: 1;
-            text-align: left;
-        }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
 
-        .menu-item span:nth-child(2) {
-            text-align: center;
-        }
+    .menu-item span {
+      flex: 1;
+    }
 
-        .menu-item button {
-            flex: 0.5;
-            text-align: right;
-            padding: 5px 15px;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+    .menu-item span:nth-child(2) {
+      text-align: center;
+    }
 
-        .menu-item button:hover {
-            background-color: #c0392b;
-        }
+    .menu-item button {
+      flex: 0.6;
+      padding: 8px 12px;
+      background-color: #d63031;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-        .order-section, .checkout-section {
-            margin-top: 20px;
-        }
+    .menu-item button:hover {
+      background-color: #c0392b;
+    }
 
-        .order-list {
-            margin: 10px 0;
-            padding: 0;
-            list-style: none;
-        }
+    .order-section,
+    .checkout-section {
+      margin-top: 20px;
+    }
 
-        .order-list li {
-            margin-bottom: 5px;
-        }
+    .order-list {
+      list-style-type: none;
+      padding: 0;
+    }
 
-        .total-amount {
-            font-weight: bold;
-            margin-top: 10px;
-        }
+    .order-list li {
+      padding: 6px 0;
+      font-size: 15px;
+    }
 
-        #reset-order, #checkout {
-            display: block;
-            margin: 10px auto;
-            width: 100%;
-            padding: 10px;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
+    .total-amount {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+    }
 
-        #reset-order:hover, #checkout:hover {
-            background-color: #c0392b;
-        }
+    #reset-order,
+    #checkout {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #d63031;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-        #name-input {
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            width: 50%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
+    #reset-order:hover,
+    #checkout:hover {
+      background-color: #c0392b;
+    }
+
+    @media (max-width: 600px) {
+      .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .menu-item span,
+      .menu-item button {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 6px;
+      }
+
+      #name-input {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>KS Kitchen - Restaurant Management System</h1>
-    </header>
+  <header>
+    <h1>KS Kitchen - Restaurant Management System</h1>
+  </header>
 
-    <input type="text" id="name-input" placeholder="Enter your name" />
+  <input type="text" id="name-input" placeholder="Enter your name" />
 
-    <div class="container">
-        <section id="menu-section">
-            <h2>Menu</h2>
-            <div id="menu"></div>
-        </section>
+  <div class="container">
+    <section id="menu-section">
+      <h2>Menu</h2>
+      <div id="menu"></div>
+    </section>
 
-        <section id="order-section" class="order-section">
-            <h2>Your Order</h2>
-            <ul id="order-list" class="order-list"></ul>
-            <div class="total-amount" id="total-amount">Total: Rs. 0.00</div>
-            <button id="reset-order">Reset Order</button>
-        </section>
+    <section id="order-section" class="order-section">
+      <h2>Your Order</h2>
+      <ul id="order-list" class="order-list"></ul>
+      <div class="total-amount" id="total-amount">Total: Rs. 0.00</div>
+      <button id="reset-order">Reset Order</button>
+    </section>
 
-        <section id="checkout-section" class="checkout-section">
-            <h2>Checkout</h2>
-            <button id="checkout">Checkout</button>
-        </section>
-    </div>
+    <section id="checkout-section" class="checkout-section">
+      <h2>Checkout</h2>
+      <button id="checkout">Checkout</button>
+    </section>
+  </div>
 
-    <script>
-        // Existing JavaScript for menu and order management remains the same
-        const menu = {
-            "Chicken Biriyani": 120.00,
-            "Mutton Biriyani": 200.00,
-            "Ulavacharu Biriyani": 250.00,
-            "Curd Rice": 150.00,
-            "Starters (Anything)": 160.00,
-            "Water": 25.00
-        };
-
-        const order = [];
-        let totalAmount = 0;
-
-        const menuDiv = document.getElementById("menu");
-        for (let [item, price] of Object.entries(menu)) {
-            const menuItemDiv = document.createElement("div");
-            menuItemDiv.classList.add("menu-item");
-            menuItemDiv.innerHTML = `
-                <span>${item}</span>
-                <span>Rs. ${price.toFixed(2)}</span>
-                <button onclick="addToOrder('${item}', ${price})">Add to Order</button>
-            `;
-            menuDiv.appendChild(menuItemDiv);
-        }
-
-        function addToOrder(item, price) {
-            const quantity = parseInt(prompt(`How many ${item}(s) would you like to order?`)) || 0;
-            if (quantity > 0) {
-                order.push({ item, quantity, price });
-                totalAmount += price * quantity;
-                updateOrderList();
-            }
-        }
-
-        function updateOrderList() {
-            const orderList = document.getElementById("order-list");
-            const totalAmountDiv = document.getElementById("total-amount");
-
-            orderList.innerHTML = "";
-            order.forEach(({ item, quantity, price }) => {
-                const li = document.createElement("li");
-                li.textContent = `${item} x ${quantity} = Rs. ${(price * quantity).toFixed(2)}`;
-                orderList.appendChild(li);
-            });
-
-            totalAmountDiv.textContent = `Total: Rs. ${totalAmount.toFixed(2)}`;
-        }
-
-        document.getElementById("reset-order").addEventListener("click", () => {
-            order.length = 0;
-            totalAmount = 0;
-            updateOrderList();
-        });
-
-    document.getElementById('checkout').addEventListener('click', async () => {
-    // Get the total amount
-    const totalAmount = document.getElementById('total-amount').innerText.replace('Total: Rs. ', '').trim();
-    const name = document.getElementById('name-input').value;
-    // Prepare the data to send
-    const data = {
-        total_amount: totalAmount,
-        customer:name
+  <script>
+    const menu = {
+      "Chicken Biriyani": 120.00,
+      "Mutton Biriyani": 200.00,
+      "Ulavacharu Biriyani": 250.00,
+      "Curd Rice": 150.00,
+      "Starters (Anything)": 160.00,
+      "Water": 25.00
     };
 
-    try {
-        // Send the data to the Django backend
+    const order = [];
+    let totalAmount = 0;
+
+    const menuDiv = document.getElementById("menu");
+    for (let [item, price] of Object.entries(menu)) {
+      const menuItemDiv = document.createElement("div");
+      menuItemDiv.classList.add("menu-item");
+      menuItemDiv.innerHTML = `
+        <span>${item}</span>
+        <span>Rs. ${price.toFixed(2)}</span>
+        <button onclick="addToOrder('${item}', ${price})">Add to Order</button>
+      `;
+      menuDiv.appendChild(menuItemDiv);
+    }
+
+    function addToOrder(item, price) {
+      const quantity = parseInt(prompt(`How many ${item}(s) would you like to order?`)) || 0;
+      if (quantity > 0) {
+        order.push({ item, quantity, price });
+        totalAmount += price * quantity;
+        updateOrderList();
+      }
+    }
+
+    function updateOrderList() {
+      const orderList = document.getElementById("order-list");
+      const totalAmountDiv = document.getElementById("total-amount");
+
+      orderList.innerHTML = "";
+      order.forEach(({ item, quantity, price }) => {
+        const li = document.createElement("li");
+        li.textContent = `${item} x ${quantity} = Rs. ${(price * quantity).toFixed(2)}`;
+        orderList.appendChild(li);
+      });
+
+      totalAmountDiv.textContent = `Total: Rs. ${totalAmount.toFixed(2)}`;
+    }
+
+    document.getElementById("reset-order").addEventListener("click", () => {
+      order.length = 0;
+      totalAmount = 0;
+      updateOrderList();
+    });
+
+    document.getElementById('checkout').addEventListener('click', async () => {
+      const totalAmountText = document.getElementById('total-amount').innerText.replace('Total: Rs. ', '').trim();
+      const name = document.getElementById('name-input').value;
+
+      const data = {
+        total_amount: totalAmountText,
+        customer: name
+      };
+
+      try {
         const response = await fetch('/place_order/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken() // Include CSRF token for security
-            },
-            body: JSON.stringify(data)
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+          },
+          body: JSON.stringify(data)
         });
 
-        // Handle the response
         if (response.ok) {
-            const result = await response.json();
-            alert('Checkout successful: ' + result.message);
+          const result = await response.json();
+          alert('Checkout successful: ' + result.message);
         } else {
-            alert('Checkout failed. Please try again.');
+          alert('Checkout failed. Please try again.');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Error during checkout:', error);
         alert('An error occurred during checkout.');
+      }
+    });
+
+    function getCSRFToken() {
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+      return csrfToken ? csrfToken.value : '';
     }
-});
-
-// Helper function to get CSRF token
-function getCSRFToken() {
-    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
-    return csrfToken ? csrfToken.value : '';
-}
-
-    </script>
+  </script>
 </body>
 </html>
